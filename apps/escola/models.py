@@ -1,18 +1,36 @@
 import uuid
 from django.db import models
 
+
+class Contacts(models.Model):
+    phone = models.CharField(
+        "Number Phone", 
+        default="", max_length=11
+    )
+    email = models.EmailField()
+
+    class Meta:
+        ordering = ("-phone",)
+
+    def __str__(self):
+        return f'phone: {self.phone}, email: {self.email}'
+
 class Aluno(models.Model):
     first_name = models.CharField(
         'primeiro nome', 
         max_length=15
         )
     surname = models.CharField(
-        'sobrenome nome', max_length=15)
+        'Sobrenome nome', max_length=15)
     rg = models.CharField(
-        'documento de rg', max_length=10)
+        'Documento de rg', max_length=10)
     cpf = models.CharField(
-        'documento de cpf', max_length=20)
+        'Documento de cpf', max_length=20)
     date_birth = models.DateField()
+    contacts = models.CharField(
+        default="", max_length=11
+    )
+    avatar = models.ImageField(blank=True)
 
     def __str__(self):
         return self.first_name
